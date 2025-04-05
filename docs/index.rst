@@ -65,8 +65,8 @@ or the GitHub site: https://github.com/BuildACell/BioCRNPyler.
    :maxdepth: 1
    :numbered: 2
 
-   Introduction <intro>
-   Tutorial <examples/biocrynpyler-tutorial.ipynb>
+   intro
+   tutorial
    Reference Manual <reference>
 
 

@@ -42,7 +42,7 @@ extensions = [
     'recommonmark'
 ]
 
-source_suffix = ['.rst', '.md', '.ipynb']
+source_suffix = ['.rst']
 
 # scan documents for autosummary directives and generate stub pages for each.
 autosummary_generate = True

@@ -1,4 +1,3 @@
-
 #  Copyright (c) 2019, Build-A-Cell. All rights reserved.
 #  See LICENSE file in the project root directory for details.
 
@@ -7,13 +6,13 @@ from numbers import Real
 from typing import List, Union
 from warnings import warn
 
-from .global_mechanism import GlobalMechanism
 from .mechanism import Mechanism
+from .mechanisms.global_mechanisms import GlobalMechanism
 from .parameter import Parameter, ParameterDatabase, ParameterKey
 from .species import Species
 
 
-class Component(object):
+class Component:
     """Component class for core components.
 
     These subclasses of Component represent different kinds of biomolecules.

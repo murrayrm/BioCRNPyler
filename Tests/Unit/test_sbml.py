@@ -1,7 +1,7 @@
 import pytest
 import warnings
 from unittest import TestCase
-from biocrnpyler.sbmlutil import *
+from biocrnpyler.utils.sbmlutil import *
 from biocrnpyler.species import Species, Complex
 from biocrnpyler.compartments import Compartment
 from biocrnpyler.propensities import MassAction, HillPositive, HillNegative, ProportionalHillPositive, ProportionalHillNegative, GeneralPropensity

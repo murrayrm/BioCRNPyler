@@ -8,12 +8,12 @@ from warnings import resetwarnings, warn
 
 from .chemical_reaction_network import ChemicalReactionNetwork
 from .component import Component
-from .global_mechanism import GlobalMechanism
+from .mechanisms.global_mechanisms import GlobalMechanism
 from .mechanism import Mechanism
 from .parameter import ParameterDatabase
 from .reaction import Reaction
 from .species import Species
-from .utils import remove_bindloc
+from .utils.utils import remove_bindloc
 
 
 class Mixture(object):

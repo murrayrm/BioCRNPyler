@@ -5,7 +5,7 @@
 from .propensities import (HillNegative, HillPositive, MassAction, Propensity,
                            ProportionalHillNegative, ProportionalHillPositive)
 
-from.species import *
+from .species import *
 import copy
 import itertools
 from typing import List, Union

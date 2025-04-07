@@ -3,7 +3,10 @@
 
 from unittest import TestCase
 from biocrnpyler import Species, Compartment
-import pytest
+from biocrnpyler import Mixture, ChemicalReactionNetwork
+import tempfile
+import os
+import libsbml
 
 
 class TestSpecies(TestCase):
@@ -63,3 +66,44 @@ class TestSpecies(TestCase):
 
         compartment = Compartment(name="test_compartment")
         self.assertEqual(compartment.unit, None)
+    
+    def test_compartment_in_sbml(self):
+        """Test that compartment setting works correctly and 
+        persists through SBML export/import"""
+        comp1 = Compartment(name="comp1")
+        s1 = Species("S1", compartment=comp1)
+        mixture_1 = Mixture(species=[s1])
+        crn_1 = mixture_1.compile_crn()
+        self.assertEqual(s1.compartment.name, "comp1")
+        # write sbml
+        with tempfile.NamedTemporaryFile(suffix='.xml', delete=False) as tmp:
+            crn_1.write_sbml_file(tmp.name)
+            model = libsbml.readSBMLFromFile(tmp.name).getModel()
+            sbml_species = model.getSpecies(0)
+            self.assertEqual(sbml_species.getCompartment(), "comp1")
+        os.remove(tmp.name)
+        
+    def test_compartment_setter(self):
+        """Test that compartment setting works correctly and 
+        persists through SBML export/import"""
+        comp1 = Compartment(name="comp1")
+        comp2 = Compartment(name="comp2") 
+
+        s1 = Species("S1", compartment=comp1)
+        mixture_1 = Mixture(species=[s1])
+        crn_1 = mixture_1.compile_crn()
+        crn_1.write_sbml_file("test_compartment_setter_1.xml")
+        # change compartment
+        s1.compartment = comp2
+        mixture_2 = Mixture(species=[s1])
+        crn_2 = mixture_2.compile_crn()
+        self.assertEqual(s1.compartment.name, "comp2")
+        
+        # with tempfile.NamedTemporaryFile(suffix='.xml', delete=False) as tmp:
+        # crn_2.write_sbml_file(tmp.name)
+        crn_2.write_sbml_file("test_compartment_setter_2.xml")
+        model = libsbml.readSBMLFromFile("test_compartment_setter_2.xml").getModel()
+        sbml_species = model.getSpecies(0)
+        self.assertEqual(sbml_species.getCompartment(), "comp2")
+            
+        # os.unlink(tmp.name)

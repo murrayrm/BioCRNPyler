@@ -9,7 +9,7 @@ from typing import List, Set, Union
 import libsbml
 
 from .parameter import ModelParameter, Parameter, ParameterEntry
-from .sbmlutil import (_create_global_parameter, _create_local_parameter,
+from .utils.sbmlutil import (_create_global_parameter, _create_local_parameter,
                        getSpeciesByName)
 from .species import Species
 

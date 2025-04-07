@@ -11,16 +11,16 @@ import random
 import statistics
 from warnings import warn
 
-from .components_basic import Protein, DNA, RNA
-from .dna_part_cds import CDS
-from .dna_part_misc import IntegraseSite, Origin, Operator, UserDefined
-from .dna_part_promoter import Promoter
-from .dna_part_rbs import RBS
-from .dna_part_terminator import Terminator
+from .components.basic import Protein, DNA, RNA
+from .components.dna.cds import CDS
+from .components.dna.misc import IntegraseSite, Origin, Operator, UserDefined
+from .components.dna.promoter import Promoter
+from .components.dna.rbs import RBS
+from .components.dna.terminator import Terminator
 from .propensities import MassAction
 from .species import ComplexSpecies, Species
 from .polymer import OrderedPolymer
-from .dna_construct import Construct
+from .components.dna.construct import Construct
 from .utils import member_dictionary_search
 import io
 import base64

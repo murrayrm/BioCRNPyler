@@ -10,7 +10,7 @@ import pytest
 import biocrnpyler as bcp
 from biocrnpyler import CRNPlotter, DNA_construct, Promoter,IntegraseSite,\
     RBS,CDS,Terminator, Complex, Species, DNA_part, RegulatedPromoter
-from biocrnpyler.dna_construct import RNA_construct
+from biocrnpyler.components.dna.construct import RNA_construct
 
 def test_CRNPlotter():
     class dummy_renderer:

@@ -2,11 +2,11 @@ import pytest
 import warnings
 from unittest import TestCase
 from biocrnpyler.utils.sbmlutil import *
-from biocrnpyler.species import Species, Complex
-from biocrnpyler.compartments import Compartment
-from biocrnpyler.propensities import MassAction, HillPositive, HillNegative, ProportionalHillPositive, ProportionalHillNegative, GeneralPropensity
-from biocrnpyler.parameter import ParameterEntry, ParameterKey
-from biocrnpyler.chemical_reaction_network import Reaction, ChemicalReactionNetwork
+from biocrnpyler import Species, Complex
+from biocrnpyler import Compartment
+from biocrnpyler import MassAction, HillPositive, HillNegative, ProportionalHillPositive, ProportionalHillNegative, GeneralPropensity
+from biocrnpyler import ParameterEntry, ParameterKey
+from biocrnpyler import Reaction, ChemicalReactionNetwork
 
 
 class TestSBML(TestCase):

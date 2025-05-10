@@ -4,6 +4,8 @@
 from unittest import TestCase
 from biocrnpyler import Species, Compartment
 from biocrnpyler import Mixture, ChemicalReactionNetwork
+from biocrnpyler.components.dna import ActivatablePromoter, DNAassembly
+from biocrnpyler.mixtures import EnergyTxTlExtract
 import tempfile
 import os
 import libsbml
@@ -107,3 +109,22 @@ class TestSpecies(TestCase):
         self.assertEqual(sbml_species.getCompartment(), "comp2")
             
         # os.unlink(tmp.name)
+    def test_compartment_in_special_mixtures(self):
+        activatable_assembly = DNAassembly(name="activatable_assembly", 
+                                           promoter=ActivatablePromoter(name="activatable_promoter"))
+        E = EnergyTxTlExtract(components=[activatable_assembly],
+                              parameter_file = "../../../default_parameters.txt")
+        self.assertEqual(E.rnap.species.compartment.name, "default")
+        E.rnap.species.compartment = Compartment(name="Internal_0")
+        CRN = E.compile_crn() #comple CRN
+        self.assertEqual(E.rnap.species.compartment.name, "Internal_0")
+        with tempfile.NamedTemporaryFile(suffix='.xml', delete=False) as tmp:
+            CRN.write_sbml_file(tmp.name)
+            model = libsbml.readSBMLFromFile(tmp.name).getModel()
+            sbml_species = model.getSpecies(0)
+            self.assertEqual(sbml_species.getCompartment(), "Internal_0")
+        os.remove(tmp.name)
+        
+
+
+

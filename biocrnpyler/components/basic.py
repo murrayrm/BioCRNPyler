@@ -4,9 +4,9 @@
 
 from typing import List, Union
 
-from ..component import Component
-from ..reaction import Reaction
-from ..species import Complex, Species
+from ..core.component import Component
+from ..core.reaction import Reaction
+from ..core.species import Complex, Species
 
 
 class DNA(Component):

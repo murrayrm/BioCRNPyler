@@ -4,8 +4,8 @@
 
 import copy
 
-from .part import DNA_part
-from ...species import Species
+from .construct import DNA_part
+from ...core.species import Species
 from ..basic import DNA, RNA
 
 class RBS(DNA_part):

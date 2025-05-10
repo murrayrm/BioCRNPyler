@@ -2,9 +2,9 @@
 # See LICENSE file in the project root directory for details.
 
 
-from ..mechanism import Mechanism
-from ..reaction import Reaction
-from ..species import Complex
+from ..core.mechanism import Mechanism
+from ..core.reaction import Reaction
+from ..core.species import Complex
 
 
 class BasicCatalysis(Mechanism):

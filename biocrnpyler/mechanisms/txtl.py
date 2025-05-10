@@ -1,10 +1,10 @@
-from ..mechanism import Mechanism
-from ..mechanisms.enzyme import MichaelisMentenCopy
-from ..propensities import ProportionalHillNegative, ProportionalHillPositive
-from ..reaction import Reaction
-from ..species import Complex, Species
-from ..utils import parameter_to_value
 from typing import List
+from ..core.mechanism import Mechanism
+from ..core.propensities import ProportionalHillNegative, ProportionalHillPositive
+from ..core.reaction import Reaction
+from ..core.species import Complex, Species
+from ..utils import parameter_to_value
+from .enzyme import MichaelisMentenCopy
 
 class OneStepGeneExpression(Mechanism):
     """A mechanism to model gene expression without transcription or translation.

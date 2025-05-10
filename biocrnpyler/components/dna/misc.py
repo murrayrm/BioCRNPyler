@@ -5,11 +5,11 @@
 import copy
 from warnings import warn
 
-from .part import DNA_part
+from .construct import DNA_part
 from ...mechanisms.binding import One_Step_Cooperative_Binding
-from ...species import Species, ComplexSpecies, Complex
+from ...core.species import Species, ComplexSpecies, Complex
 from ...mechanisms.integrase import BasicIntegration
-from ...component import Component
+from ...core.component import Component
 from ..basic import DNA
 
 integrase_sites = ["attB","attP","attL","attR","FLP","CRE"]

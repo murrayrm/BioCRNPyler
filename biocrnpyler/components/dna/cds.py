@@ -2,9 +2,9 @@
 # Copyright (c) 2020, Build-A-Cell. All rights reserved.
 # See LICENSE file in the project root directory for details.
 
-from ...chemical_reaction_network import Species
-from ...component import Component
-from .part import DNA_part
+from ...core.chemical_reaction_network import Species
+from ...core.component import Component
+from .construct import DNA_part
 
 
 class CDS(DNA_part):

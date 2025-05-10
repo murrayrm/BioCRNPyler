@@ -2,11 +2,11 @@
 # Copyright (c) 2020, Build-A-Cell. All rights reserved.
 # See LICENSE file in the project root directory for details.
 
-from ..mechanism import Mechanism
-from ..reaction import Reaction
-from ..species import Complex
-from ..propensities import ProportionalHillNegative, GeneralPropensity
-from ..parameter import Parameter, ParameterEntry
+from ..core.mechanism import Mechanism
+from ..core.reaction import Reaction
+from ..core.species import Complex
+from ..core.propensities import ProportionalHillNegative, GeneralPropensity
+from ..core.parameter import Parameter, ParameterEntry
 
 class Simple_Diffusion(Mechanism):
     """A mechanism to model the diffusion of a substrate through a membrane channel.

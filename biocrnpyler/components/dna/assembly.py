@@ -3,15 +3,15 @@
 
 from typing import List, Union
 
-from ...component import Component
+from ...core.component import Component
 from ..basic import DNA, RNA, Protein
 from .promoter import Promoter
 from .rbs import RBS
-from ...mechanism import Mechanism
-from ...mixture import Mixture
-from ...parameter import ParameterDatabase
-from ...reaction import Reaction
-from ...species import Species
+from ...core.mechanism import Mechanism
+from ...core.mixture import Mixture
+from ...core.parameter import ParameterDatabase
+from ...core.reaction import Reaction
+from ...core.species import Species
 
 
 class DNAassembly(DNA):

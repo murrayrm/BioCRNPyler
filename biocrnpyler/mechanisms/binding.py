@@ -4,9 +4,9 @@
 
 import itertools as it
 
-from ..mechanism import Mechanism
-from ..reaction import Reaction
-from ..species import Complex, Species, WeightedSpecies
+from ..core.mechanism import Mechanism
+from ..core.reaction import Reaction
+from ..core.species import Complex, Species, WeightedSpecies
 
 
 class One_Step_Cooperative_Binding(Mechanism):

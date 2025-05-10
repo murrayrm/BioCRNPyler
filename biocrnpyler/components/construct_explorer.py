@@ -18,7 +18,7 @@ from .dna.rbs import RBS
 from .dna.terminator import Terminator
 from .dna.construct import Construct, RNA_construct
 from .component_enumerator import LocalComponentEnumerator
-from .utils import all_comb, remove_bindloc, rev_dir
+from ..utils import all_comb, remove_bindloc, rev_dir
 import logging
 
 

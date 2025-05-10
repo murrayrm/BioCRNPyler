@@ -1,17 +1,18 @@
 # Copyright (c) 2020, Build-A-Cell. All rights reserved.
 # See LICENSE file in the project root directory for details.
 
-from ..chemical_reaction_network import ChemicalReactionNetwork
+from ..core.chemical_reaction_network import ChemicalReactionNetwork
+from ..core.mechanism import EmptyMechanism
+from ..core.mixture import Mixture
+
 from ..components.basic import Protein
 from ..components.dna.assembly import DNAassembly
 from ..mechanisms.global_mechanisms import Degredation_mRNA_MM, Dilution
-from ..mechanism import EmptyMechanism
 from ..mechanisms.binding import One_Step_Binding
 from ..mechanisms.enzyme import BasicCatalysis, MichaelisMenten
 from ..mechanisms.txtl import (OneStepGeneExpression, SimpleTranscription,
                               SimpleTranslation, Transcription_MM,
                               Translation_MM)
-from ..mixture import Mixture
 
 
 class ExpressionDilutionMixture(Mixture):

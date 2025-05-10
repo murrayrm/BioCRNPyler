@@ -5,17 +5,14 @@ import copy
 import itertools as it
 from warnings import warn
 
-from .part import DNA_part
+from .construct import DNA_part
 from ...mechanisms.binding import (Combinatorial_Cooperative_Binding,
                                  One_Step_Cooperative_Binding)
 from ...mechanisms.txtl import (NegativeHillTranscription,
                               PositiveHillTranscription)
-from ...species import Species
+from ...core.species import Species
 from ..basic import DNA, RNA
-from ...utils.utils import remove_bindloc
 
-
-#TODO put remove_bindloc in the component instead of in dna_construct
 class Promoter(DNA_part):
     """A basic Promoter class with no regulation. Needs to be included in a DNAassembly or DNAconstruct to function.
     """

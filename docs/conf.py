@@ -18,13 +18,13 @@ sys.path.insert(0, os.path.abspath('..'))
 # -- Project information -----------------------------------------------------
 
 project = 'BioCRNPyler'
-copyright = '2020, Build-a-Cell'
+copyright = '2025, Build-a-Cell'
 author = 'William Poole, Ayush Pandey, Andrey Shur, Zoltan Tuza, Richard M. Murray'
 
 # The short X.Y version
-version = '1.1'
+version = '1.3'
 # The full version, including alpha/beta/rc tags
-release = '1.1.0'
+release = '1.3.0'
 
 
 # -- General configuration ---------------------------------------------------

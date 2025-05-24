@@ -192,13 +192,15 @@ class ChemicalReactionNetwork(object):
         return txt
 
     def pretty_print(self, show_rates = True, show_material = True, show_attributes = True, show_compartment = False,
-                        show_initial_concentration = True, show_keys = True, **kwargs):
+                        show_initial_concentration = True, show_keys = True,
+                        show_compartments = False, **kwargs):
         """A more powerful printing function.
 
         Useful for understanding CRNs but does not return string identifiers.
         show_material toggles whether species.material is printed.
         show_attributes toggles whether species.attributes is printed
         show_rates toggles whether reaction rate functions are printed
+        show_compartment toggles whether species.compartment is printed
         """
 
         txt = "Species"+ f"(N = {len(self._species)}) = "+"{\n"
@@ -211,7 +213,8 @@ class ChemicalReactionNetwork(object):
         for sind, (init_conc, s) in enumerate(species_sort_list):
             init_conc = ics(s) 
 
-            txt += s.pretty_print(show_material = show_material, show_compartment = False, show_attributes = show_attributes, **kwargs)
+            txt += s.pretty_print(show_material = show_material, show_compartment = show_compartments,
+                                  show_attributes = show_attributes, **kwargs)
 
             if show_initial_concentration:
                 txt += f" (@ {parameter_to_value(init_conc)}),  "

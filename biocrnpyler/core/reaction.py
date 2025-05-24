@@ -150,7 +150,8 @@ class Reaction(object):
         """Helper function to print the text of a rate function"""
         return self.pretty_print(show_rates=False, show_material=True, show_attributes=True, show_parameters = False)
 
-    def pretty_print(self, show_rates=True, show_material=True, show_attributes=True, show_parameters = True, **kwargs):
+    def pretty_print(self, show_rates=True, show_material=True,
+                     show_attributes=True, show_parameters = True, **kwargs):
 
         kwargs['show_rates'] = show_rates
         kwargs['show_material'] = show_material

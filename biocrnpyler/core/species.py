@@ -203,7 +203,7 @@ class Species(OrderedMonomer):
         return [self]
 
     def pretty_print(self, show_material=True, show_compartment=False, show_attributes=True,
-                     show_initial_condition=False, **kwargs):
+                     show_initial_condition=False, show_compartments=False, **kwargs):
         """
         #A more powerful printing function. 
         Useful for understanding CRNs but does not return string identifiers.

@@ -175,6 +175,9 @@ class Species(OrderedMonomer):
                     txt += "_" + str(i)
         if self.compartment.name != 'default':
             # Only add a compartment name if it is not the default one.
+            # if compartment name is already there with an underscore 
+            # remove it from the string first to not repeat the compartment tag
+            txt = txt.replace("_" + self.compartment.name, "")
             txt += "_" + self.compartment.name
         txt.replace("'", "")
         return txt

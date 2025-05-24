@@ -1,6 +1,6 @@
 mechanism	part_id	param_name	value	comments
-membrane_protein_integration		kb_oligmor	2E-3	Arbitrary value for the binding integration step if protein is an oligomer
-membrane_protein_integration		ku_oligmor	2E-10	Arbitrary value for the unbinding integration steps if protein is an oligomer 
+membrane_protein_integration		kb_oligomer	2E-3	Arbitrary value for the binding integration step if protein is an oligomer
+membrane_protein_integration		ku_oligomer	2E-10	Arbitrary value for the unbinding integration steps if protein is an oligomer 
 membrane_protein_integration		kex	1E1	Arbitrary value for the integration of protein into membrane
 membrane_protein_integration		kcat	5E-1	Arbitrary value for the integration of protein into membrane
 simple_diffusion		k_diff	2E-4	Arbitrary value for the diffusion of molecule through membrane

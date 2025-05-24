@@ -23,8 +23,9 @@ class DNA(Component):
         :param attributes: Species attribute
         :param keywords: pass into the parent's (Component) initializer
         """
-        self.species = self.set_species(name, material_type="dna", attributes=attributes)
-        super().__init__(name=name, length = length, **keywords)
+        self.species = self.set_species(name, material_type="dna",
+                                        attributes=attributes)
+        super().__init__(name=name, length=length, **keywords)
 
     def get_species(self) -> Species:
         return self.species

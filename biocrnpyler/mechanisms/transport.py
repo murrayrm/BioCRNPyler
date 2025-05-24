@@ -67,8 +67,8 @@ class Membrane_Protein_Integration(Mechanism):
         """This always requires the inputs component and part_id to find the relevant parameters"""
 
         # Get Parameters
-        kb_oligmor = component.get_parameter("kb_oligmor", part_id = part_id, mechanism = self)
-        ku_oligmor = component.get_parameter("ku_oligmor", part_id = part_id, mechanism = self)
+        kb_oligomer = component.get_parameter("kb_oligomer", part_id = part_id, mechanism = self)
+        ku_oligomer = component.get_parameter("ku_oligomer", part_id = part_id, mechanism = self)
         kex = component.get_parameter("kex", part_id = part_id, mechanism = self)
         kcat = component.get_parameter("kcat", part_id = part_id, mechanism = self)
         
@@ -86,8 +86,8 @@ class Membrane_Protein_Integration(Mechanism):
             # homo: monomer --> oligomer
             binding_rxn1 = Reaction.from_massaction(inputs=[integral_membrane_protein]*size,
                                                 outputs=[complex1],
-                                                k_forward=kb_oligmor,
-                                                k_reverse=ku_oligmor)
+                                                k_forward=kb_oligomer,
+                                                k_reverse=ku_oligomer)
 
             # oligomer-->integrated
             prophill_negative = ProportionalHillNegative(k=kex, d=complex1, K=kcat, n=4, s1=product)

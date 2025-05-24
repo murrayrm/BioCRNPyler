@@ -7,6 +7,7 @@ from typing import List, Union
 from warnings import warn
 
 from .mechanism import Mechanism
+from .compartment import Compartment
 from ..mechanisms.global_mechanisms import GlobalMechanism
 from .parameter import Parameter, ParameterDatabase, ParameterKey
 from .species import Species
@@ -24,6 +25,7 @@ class Component:
                  parameters=None,  # parameter configuration
                  parameter_file=None,  # custom parameter file
                  mixture=None,
+                 compartment=None,
                  attributes=None,
                  initial_concentration = None, #This is added as a parameter ("initial concentration", None, self.name):initial_concentration
                  initial_condition_dictionary=None,
@@ -36,6 +38,7 @@ class Component:
         :param parameters:
         :param parameter_file:
         :param mixture:
+        :param compartment:
         :param attributes:
         :param initial_concentration:
         :param initial_condition_dictionary:
@@ -62,6 +65,11 @@ class Component:
         else:
             self.set_mixture(None)
 
+        if compartment is not None:
+            if not isinstance(compartment, Compartment):
+                raise TypeError("The compartment must be a Compartment object")
+            self.compartment = compartment
+     
         self.parameter_database = ParameterDatabase(parameter_file=parameter_file, parameter_dictionary=parameters)
         self.initial_concentration = initial_concentration
 
@@ -70,6 +78,7 @@ class Component:
             self.initial_condition_dictionary = {}
         else:
             self.initial_condition_dictionary = dict(initial_condition_dictionary)
+
     @property
     def initial_concentration(self):
         return self._initial_concentration
@@ -84,6 +93,38 @@ class Component:
     
         self._initial_concentration = initial_concentration
 
+    @property
+    def compartment(self):
+        """The compartment of the Component.
+
+        :return: Compartment
+        """
+        return self._compartment
+    
+    @compartment.setter
+    def compartment(self, compartment: Compartment) -> None:
+        """Set the compartment of the Component.
+
+        :param compartment:
+        :return: None
+        """
+        if compartment is not None and not isinstance(compartment, Compartment):
+            raise TypeError("The compartment must be a Compartment object")
+        if compartment is not None:
+            self._compartment = compartment
+        if hasattr(self, "_compartment") and self._compartment:
+            if hasattr(self, "species"):
+                if isinstance(self.species, list):
+                    for s in self.species:
+                        if s.compartment.name == "default":
+                            s.compartment = compartment
+                else:
+                    if self.species.compartment.name == "default":
+                        self.species.compartment = compartment
+        if compartment is not None and not isinstance(compartment, Compartment):
+            raise TypeError("The compartment must be a Compartment object")
+            
+    
     def set_mixture(self, mixture) -> None:
         """Set the mixture the Component is in.
 
@@ -91,7 +132,7 @@ class Component:
         :return: None
         """
         self.mixture = mixture
-
+        
     # TODO implement as an abstractmethod
     def get_species(self) -> None:
         """The subclasses should implement this method!
@@ -99,6 +140,7 @@ class Component:
         :return: None
         """
         return None
+
     @classmethod
     def set_species(self, species: Union[Species, str], 
                     material_type=None, compartment=None, 

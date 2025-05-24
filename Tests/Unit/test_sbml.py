@@ -146,6 +146,7 @@ class TestSBML(TestCase):
             with pytest.raises(ValueError, match = "Could not write the rate law for reaction to SBML. Check the propensity functions of reactions."):
                 rxn = Reaction([],[S1], propensity_type = prop)
                 sbml_reaction = add_reaction(model, rxn, "r_err")
+    
     def test_add_reaction_for_bioscrape(self):
         """
         Generates models for bioscrape including the particular annotations needed.
@@ -337,8 +338,8 @@ def test_sbml_basics():
         else:
             return
 
-    from biocrnpyler.sbmlutil import _create_global_parameter, _create_local_parameter
-    from biocrnpyler.sbmlutil import _create_modifiers, _create_products, _create_reactants
+    from biocrnpyler.utils.sbmlutil import _create_global_parameter, _create_local_parameter
+    from biocrnpyler.utils.sbmlutil import _create_modifiers, _create_products, _create_reactants
     # generate an sbml model
     document, model = create_sbml_model()
 

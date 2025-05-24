@@ -108,22 +108,27 @@ class GlobalMechanism(Mechanism):
             use_mechanism = self.default_on
         return use_mechanism
 
-    def update_species_global(self, species_list: List[Species], mixture):
+    def update_species_global(self, species_list: List[Species], mixture, compartment=None):
         new_species = []
         for s in species_list:
             use_mechanism = self.apply_filter(s)
             if use_mechanism:
                 new_species += self.update_species(s, mixture)
+        if compartment:
+            for s in new_species:
+                if compartment is not None and s.compartment.name == "default":
+                    s.compartment = compartment
         return new_species
 
-    def update_reactions_global(self, species_list: List[Species], mixture):
+    def update_reactions_global(self, species_list: List[Species], mixture, compartment=None):
         fd = self.filter_dict
         new_reactions = []
         for s in species_list:
             use_mechanism = self.apply_filter(s)
+            if compartment is not None and s.compartment.name == "default":
+                s.compartment = compartment
             if use_mechanism:
                 new_reactions += self.update_reactions(s, mixture)
-
         return new_reactions
 
     def get_parameter(self, species, param_name, mixture):

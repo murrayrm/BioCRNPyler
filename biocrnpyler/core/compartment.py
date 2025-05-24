@@ -3,7 +3,7 @@
 
 import warnings
 
-class Compartment():
+class Compartment:
 
     """ A formal Compartment object for a Species in a CRN.
      A Compartment must have a name. They may also have a spatial dimension (such as 2 for two-dimensional,

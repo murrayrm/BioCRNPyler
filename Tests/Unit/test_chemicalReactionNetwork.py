@@ -87,33 +87,33 @@ class TestChemicalReactionNetwork(TestCase):
 
     def test_species_protection(self):
         #tests that Species cannot be changed once they are in a CRN
-        S = Species("S")
-        S2 = Species("S2")
-        CRN = ChemicalReactionNetwork([S], [])
+        S_1 = Species("S_1")
+        S_2 = Species("S_2")
+        CRN = ChemicalReactionNetwork([S_1], [])
 
         #Internal species copied correctly to return
-        assert S in CRN.species
+        assert S_1 in CRN.species
 
-        #assert species are copied
-        assert not S is CRN._species[0]
+        #assert species are copied to internal species set
+        assert S_1 is not list(CRN._species_set)[0]
 
-        #Returned list does not effect internal species
-        CRN.species[0] = S2
-        assert S2 not in CRN.species
+        #Returned list does not affect internal species
+        CRN.species[0] = S_2
+        assert S_2 not in CRN.species
 
-        #add species effects internal species list
-        CRN.add_species(S2)
-        assert S2 in CRN.species
+        #add species affects internal species list
+        CRN.add_species(S_2)
+        assert S_2 in CRN.species
         #assert correct copying
-        assert S2 is not CRN._species[1]
+        assert S_2 is not list(CRN._species_set)[1]
 
         with self.assertRaisesRegex(AttributeError, "The species in a CRN cannot be removed or modified*"):
             CRN.species = []
 
         #Test bypassing species protection
         CRN = ChemicalReactionNetwork([], [])
-        CRN.add_species([S], copy_species = False)
-        assert S is CRN._species[0]
+        CRN.add_species([S_1], copy_species = False)
+        assert S_1 is list(CRN._species_set)[0]
 
     def test_reaction_protection(self):
         #tests that Reactions cannot be changed once they are in a CRN

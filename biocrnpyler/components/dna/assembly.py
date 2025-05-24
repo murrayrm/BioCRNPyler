@@ -19,7 +19,8 @@ class DNAassembly(DNA):
 
     def __init__(self, name: str, dna=None, promoter=None, transcript=None,
                  rbs=None, protein=None, length=None,
-                 attributes=None, mechanisms=None, parameters=None, initial_concentration=None, **keywords):
+                 attributes=None, mechanisms=None,
+                 parameters=None, initial_concentration=None, **keywords):
         """
             Note:
         If transcript is None and protein is not None,

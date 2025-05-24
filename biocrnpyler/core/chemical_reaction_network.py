@@ -1,3 +1,4 @@
+
 #  Copyright (c) 2020, Build-A-Cell. All rights reserved.
 #  See LICENSE file in the project root directory for details.
 
@@ -8,13 +9,12 @@ from warnings import warn
 import numbers
 
 import libsbml # type: ignore
-# Core
+
 from .reaction import Reaction
-from .species import Species
-from .parameter import ModelParameter, Parameter
-# Utilities
 from ..utils.sbmlutil import add_all_reactions, add_all_species, add_all_compartments, create_sbml_model
+from .species import Species
 from ..utils import process_initial_concentration_dict, parameter_to_value, remove_bindloc
+from .parameter import ModelParameter, Parameter
 
 
 class ChemicalReactionNetwork(object):
@@ -47,7 +47,7 @@ class ChemicalReactionNetwork(object):
     def species(self, species):
         if not hasattr(self, "_species"):
             self._species = []
-            self._species_dict = {}
+            self._species_set = set()
             self.add_species(species)
         else:
             raise AttributeError("The species in a CRN cannot be removed or modified. New Species can be added with CRN.add_species(...).")
@@ -65,7 +65,7 @@ class ChemicalReactionNetwork(object):
             raise AttributeError("The reactions in a CRN cannot be removed or modified. New reactions can be added with CRN.add_reactions(...).")
 
     
-    def add_species(self, species, copy_species = True):
+    def add_species(self, species, copy_species = True, compartment = None):
         """Adds a Species or a list of Species to the CRN object
 
         :param species: Species instance or list of Species instances
@@ -85,11 +85,15 @@ class ChemicalReactionNetwork(object):
         for s in species:
             if not isinstance(s, Species): #check species are Species
                 raise ValueError("A non-species object was used as a species!")
-            if s not in self._species_dict: #Do not add duplicate Species
-                self._species_dict[s] = True
+            if s not in self._species_set: #Do not add duplicate Species
+                if compartment is not None and s.compartment.name == "default":
+                    s.compartment = compartment
+                self._species_set.add(s)
                 self._species.append(s) #copy the species and add it to the CRN
+                
 
-    def add_reactions(self, reactions: Union[Reaction,List[Reaction]], copy_reactions = True, add_species = True) -> None:
+    def add_reactions(self, reactions: Union[Reaction,List[Reaction]],
+                      copy_reactions = True, add_species = True, compartment = None) -> None:
         """Adds a reaction or a list of reactions to the CRN object
 
         :param reactions: Reaction instance or list of Reaction instances
@@ -115,7 +119,9 @@ class ChemicalReactionNetwork(object):
 
                 # add all the Species in the reaction to the CRN
                 reaction_species = list(set([w.species for w in r.inputs + r.outputs]))
-                self.add_species(reaction_species, copy_species = copy_reactions)
+                self.add_species(reaction_species,
+                                 copy_species = copy_reactions,
+                                 compartment = compartment)
 
     @property
     def initial_concentration_dict(self):
@@ -127,7 +133,7 @@ class ChemicalReactionNetwork(object):
             self._initial_concentration_dict = {}
         elif isinstance(initial_concentration_dict, dict):
             for s in initial_concentration_dict:
-                if s not in self._species_dict:
+                if s not in self._species_set:
                     raise ValueError(f"Trying to set the initial concentration of a Species {s} not in the CRN")
                 elif parameter_to_value(initial_concentration_dict[s]) >= 0:
                     self.initial_concentration_dict[s] = initial_concentration_dict[s]

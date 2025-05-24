@@ -3,7 +3,7 @@
 
 from unittest import TestCase
 from biocrnpyler import Species, WeightedSpecies
-import pytest
+import pytest # type: ignore
 
 
 class TestSpecies(TestCase):
@@ -19,8 +19,7 @@ class TestSpecies(TestCase):
         self.assertEqual(species.compartment.name, "default")
         # tests naming convention for species with name and compartment
         species = Species(name='test_species', compartment='test_compartment')
-        self.assertEqual(repr(species), species.name +
-                         '_' + species.compartment.name)
+        self.assertEqual(repr(species), species.name + "_" + species.compartment.name)
         self.assertEqual(species.compartment.name, 'test_compartment')
 
         # tests material type
@@ -44,7 +43,8 @@ class TestSpecies(TestCase):
         species = Species(name='test_species', material_type="dna")
         # tests naming convention via repr without attributes
         self.assertEqual(
-            repr(species), species.material_type + "_" + species.name)
+            repr(species),
+            species.material_type + "_" + species.name)
 
         # tests adding attributes
         attr_list = ['atr1', 'atr2']

@@ -1,13 +1,5 @@
-Library
-=======
-
-This page documents the library of **Components**, **Mechanisms**, and **Mixtures** available in the `biocrnpyler` package. The lists below are automatically generated from the class names and file structure of the `biocrnpyler/` directory.
-
-.. note::
-    This documentation is auto-generated. To update, run the provided script to re-scan the `biocrnpyler/` source directory.
-
-Components
-----------
+The BioCRNpyler Library
+=======================
 
 .. automodule:: biocrnpyler
     :members:

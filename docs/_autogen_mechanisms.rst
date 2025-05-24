@@ -1,6 +1,3 @@
-Mechanisms
-==========
-
 Binding
 -------
 - :class:`biocrnpyler.mechanisms.binding.One_Step_Cooperative_Binding`

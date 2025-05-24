@@ -1,6 +1,3 @@
-Mixtures
-========
-
 Cell
 ----
 - :class:`biocrnpyler.mixtures.cell.ExpressionDilutionMixture`

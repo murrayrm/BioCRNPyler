@@ -19,8 +19,6 @@ def write_rst_file(out_path, header, sections):
     """
     with open(out_path, 'w', encoding='utf-8') as f:
         # Main title
-        f.write(header + '\n')
-        f.write('=' * len(header) + '\n\n')
         for title, lines in sections:
             f.write(title + '\n')
             f.write('-' * len(title) + '\n')

@@ -1,7 +1,4 @@
 Components
-==========
-
-Components
 ----------
 - :class:`biocrnpyler.components.basic.DNA`
 - :class:`biocrnpyler.components.basic.RNA`

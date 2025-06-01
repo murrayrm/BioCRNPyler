@@ -58,7 +58,7 @@ developers.
 
 .. _fig-overview:
 
-.. figure:: figures/BioCRNpyler_Overview.pdf
+.. figure:: figures/BioCRNpyler_Overview.png
    :width: 100%
    :align: center
 
@@ -88,7 +88,7 @@ on the modeling context and detail desired.
 
 .. _fig-simulations:
 
-.. figure:: figures/BioCRNpyler_Simulation.pdf
+.. figure:: figures/BioCRNpyler_Simulation.png
    :width: 98%
    :align: center
 
@@ -116,7 +116,7 @@ parameters and then refined with detailed parameter files later.
 
 .. _fig-code:
 
-.. figure:: figures/BioCRNpyler_Code.pdf
+.. figure:: figures/BioCRNpyler_Code.png
    :width: 100%
    :align: center
 

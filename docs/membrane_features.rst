@@ -67,7 +67,7 @@ The following membrane-associated mechanisms that are available in BioCRNpyler:
   driven by concentration gradients, without the need for membrane proteins or 
   energy input.
 
-- Membrane protein-mediated mechanisms
+- Membrane protein-mediated mechanisms:
     - ``Membrane_Protein_Integration()``: 
       Models the insertion and proper orientation of proteins into the 
       membrane, ensuring their structural and functional integration within the
@@ -110,8 +110,9 @@ components and transport mechanisms from modular, high-level specifications.
 
 :ref:`Figure 3.2 <fig-flow_chart_membrane_features>` illustrates the various options 
 available for modeling transport and two-component signaling within BioCRNpyler. It 
-specifically highlights the membrane components, indicated by purple boxes, along 
-with their corresponding mechanisms, represented by the blue box.
+specifically highlights the membrane components (orange boxes), their corresponding 
+mechanisms (green boxes), and species (blue boxes).
+
 
 ----------------
 Diffusible Molecule
@@ -126,17 +127,17 @@ oxygen (O\ :sub:`2`\) and carbon dioxide (CO\ :sub:`2`\), as well as small polar
 but uncharged molecules. In contrast, larger uncharged molecules and charged 
 molecules require membrane proteins for transport across the membrane.
 
-The following code defines a diffusible molecule called ``S``:
+The following code defines a diffusible molecule called `S`:
 
 .. code-block:: python
 
     # Define component
     S = DiffusibleMolecule('name')
 
-Unless otherwise specified, the species ``S`` will reside in the ``internal`` 
+Unless otherwise specified, the species `S` will reside in the `internal` 
 compartment. The membrane component ``DiffusibleMolecule(Component)`` will then 
-create a species ``product``, which is a copy of ``S`` but located in the 
-``external`` compartment.
+create a species `product`, which is a copy of `S` but located in the 
+`external` compartment.
 
 .. _simple-diffusion:
 
@@ -153,8 +154,8 @@ the assistance of membrane proteins, and the transport direction is determined
 by the concentration gradient, moving from areas of high concentration to areas 
 of low concentration.
 
-In BioCRNpyler, the ``DiffusibleMolecule`` component uses the mechanism 
-``Simple_Diffusion``, which is defined as follows:
+In BioCRNpyler, the ``DiffusibleMolecule()`` component uses the mechanism 
+``Simple_Diffusion()``, which is defined as follows:
 
 .. code-block:: python
 
@@ -168,7 +169,6 @@ Example 1: Diffusion of nitrate
 Construct a chemical reaction network (CRN) for the diffusion of nitrate 
 (NO\ :sub:`3`\) across a membrane.
 
-
 .. figure:: figures/Simple_Diffusion.png
    :width: 100%
    :align: center
@@ -181,8 +181,8 @@ Consider the following diffusion step for the diffusion of nitrate (NO\ :sub:`3`
 
     (NO_3)_{internal} \rightleftharpoons (NO_3)_{internal}
 
-To model the example above using the ``Diffusible_Molecule`` component and the 
-``Simple_Diffusion`` mechanism, we must first define the diffusible molecule 
+To model the example above using the ``Diffusible_Molecule()`` component and the 
+``Simple_Diffusion()`` mechanism, we must first define the diffusible molecule 
 and then incorporate it into a mixture using the mechanism to construct a CRN.
 
 .. code-block:: python
@@ -238,7 +238,7 @@ play essential roles in transport, signaling, and structural support. Once
 integrated, they can mediate the movement of other molecules or relay signals 
 across the membrane.
 
-The following code defines an integral membrane protein component called ``IMP``. 
+The following code defines an integral membrane protein component called `IMP`. 
 It requires two inputs: ``membrane_protein`` and ``product``, which can be 
 either strings or ``Species`` objects.
 
@@ -265,19 +265,19 @@ the stoichiometry, and specify the compartment.
 
 **Key Optional Parameters**
 
-- ``direction``: Specifies the transport direction with `'Exporter'`,
-  `'Importer'`, or `'Passive'` (default) options. The default value of 
-  `'Passive'` indicates that the membrane protein is an integral
+- ``direction``: Specifies the transport direction with `Exporter`,
+  `Importer`, or `Passive` (default) options. The default value of 
+  `Passive` indicates that the membrane protein is an integral
   membrane protein. This default may apply to non-transporter proteins or 
   unidirectional transporters.  The flux of the substrates, based on the 
-  `'direction`', follows the general transport below.
+  ``direction``, follows the general transport below.
     - Exporter: :math:`S_{in} \rightarrow S_{out}`  
     - Importer: :math:`S_{in} \leftarrow S_{out}`  
     - Passive: :math:`S_{in} \leftrightarrow S_{out}`
 
 - ``size``: Defines the number of monomers required for the integral membrane 
-  used in `'Membrane_Protein_Integration()'` and the subsequent reactions. For 
-  homo-oligomer membrane proteins, we can include an input for `'size'` as 
+  used in ``Membrane_Protein_Integration()`` and the subsequent reactions. For 
+  homo-oligomer membrane proteins, we can include an input for `size` as 
   either a numerical string or an integer.
     - If provided: :math:`MP_{monomer} * size \rightarrow MP_{oligomer} \rightarrow IMP`
     
@@ -296,7 +296,7 @@ mechanism does not model active transport or signaling directly, but it provides
 the foundational step of embedding proteins into the membrane, where they can 
 carry out these roles.
 
-The ``IntegralMembraneProtein`` component uses the ``Membrane_Protein_Integration`` 
+The ``IntegralMembraneProtein()`` component uses the ``Membrane_Protein_Integration()`` 
 mechanism. The mechanism for integrating membranes can be implemented and 
 stored in a dictionary.
 
@@ -332,16 +332,15 @@ Consider the following membrane integration steps for alpha-hemolysin.
 
     \alpha HL_{homoheptamer} \rightarrow \alpha HL_{channel}
 
-To model the example above using the ``IntegralMembraneProtein`` component and 
-the ``Membrane_Protein_Integration`` mechanism, we must first define the 
+To model the example above using the ``IntegralMembraneProtein()`` component and 
+the ``Membrane_Protein_Integration()`` mechanism, we must first define the 
 integral membrane protein (e.g., alpha-hemolysin) and then incorporate it into 
 a mixture using the integration mechanism to construct a CRN. 
 
 .. code-block:: python
 
     # Define membrane protein
-    alphaHL = IntegralMembraneProtein('alphaHL_monomer', product='alphaHL',
-                                        size = 7)
+    alphaHL = IntegralMembraneProtein('alphaHL_monomer', product='alphaHL', size = 7)
     
     # Mechanisms
     mech_integration = Membrane_Protein_Integration()
@@ -401,7 +400,7 @@ bilayer. They allow specific molecules or ions to pass through the membrane
 and play key roles in regulated transport, enabling the movement of substrates 
 in response to concentration gradients or signaling events.
 
-The following code defines a membrane channel component called ``MC``. It 
+The following code defines a membrane channel component called `MC`. It 
 requires two inputs: ``integral_membrane_protein`` and ``substrate``, which 
 can be either strings or ``Species`` objects.
 
@@ -410,24 +409,23 @@ can be either strings or ``Species`` objects.
     # Define component
     MC = MembraneChannel(integral_membrane_protein = "IMP", substrate = "S")
 
-The component also accepts optional inputs, similar to the `IntegralMembraneProtein`. 
-However, if the `integral membrane protein`` has already been defined using 
-`IntegralMembraneProtein()`, the `MembraneChannel` will inherit its `direction` 
-and `compartment` properties from the existing species (e.g., ``IMP``).
+The component also accepts optional inputs, similar to the ``IntegralMembraneProtein()``. 
+However, if the `integral membrane protein` has already been defined using 
+``IntegralMembraneProtein()``, the ``MembraneChannel()`` will inherit its ``direction`` 
+and `compartment` properties from the existing species (e.g., `IMP`).
 
-The ``MembraneChannel`` component can utilize the ``Simple_Transport`` or 
-``Facilitated_Transport_MM`` mechanism. The choice of mechanism depends on 
+The ``MembraneChannel()`` component can utilize the ``Simple_Transport()`` or 
+``Facilitated_Transport_MM()`` mechanism. The choice of mechanism depends on 
 the biological behavior of the channel. You can choose from one of the 
 following options:
 
 - **Simple_Transport**:  
     Allows bidirectional movement of substrates following the concentration 
-    gradient. The direction of the membrane channel must be set to ``Passive``.
-
+    gradient. The direction of the membrane channel must be set to `Passive`.
 - **Facilitated_Transport_MM**:  
     Allows the unidirectional movement of substrates, also along concentration 
-    gradient. The `direction` of the membrane channel must be either ``Importer`` 
-    or ``Exporter``.
+    gradient. The ``direction`` of the membrane channel must be either `Importer` 
+    or `Exporter`.
 
 .. _simple-transport:
 
@@ -476,9 +474,9 @@ pore:
 
     ATP_{internal} + \alpha HL_{channel} \leftrightarrow ATP_{external} + \alpha HL_{channel}
 
-To model the example above using the ``Membrane_Channel`` component and the 
-``Simple_Transport`` mechanism, we use the previously defined integral 
-membrane protein (e.g., alphaHL) represented by ``alphaHL_monomer.product`` 
+To model the example above using the ``Membrane_Channel()`` component and the 
+``Simple_Transport()`` mechanism, we use the previously defined integral 
+membrane protein (e.g., alphaHL) represented by `alphaHL_monomer.product` 
 and incorporate it into a mixture with the transport mechanism to construct
 a CRN that enables passive transport across the membrane.
 
@@ -531,7 +529,7 @@ the process is selective and directional, following the concentration gradient
 of the substrate.
 
 The ``Facilitated_Transport_MM()`` mechanism involves binding, translocation, 
-and unbinding steps. For example, if the membrane channel is an ``importer``, 
+and unbinding steps. For example, if the membrane channel is an `importer`, 
 the resulting reactions are:
 
 1. **Binding and transport of substrate (S) across the membrane:**
@@ -547,8 +545,8 @@ the resulting reactions are:
     S_{internal}:MC_{channel} \rightarrow S_{internal} + MC_{channel}
 
 To use ``Facilitated_Transport_MM()``, we need to redefine the membrane channel 
-to include a transport direction designation, such as ``Importer`` or 
-``Exporter``. For example:
+to include a transport direction designation, such as `Importer` or 
+`Exporter`. For example:
 
 .. code-block:: python
 
@@ -597,10 +595,10 @@ Consider the following reactions of the transport of glucose by GLUT1.
     glucose_{internal}:GLUT1_{channel} \rightarrow glucose_{internal} + GLUT1_{channel}
 
 
-To model the example above using the ``MembraneChannel`` component and the 
-``Facilitated_Transport_MM`` mechanism, we can either redefine the 
-"Membrane_Channel" component or the integral membrane protein GLUT1
-using the "IntegralMembraneProtein" component to incorporate directionality.
+To model the example above using the ``MembraneChannel()`` component and the 
+``Facilitated_Transport_MM()`` mechanism, we can either redefine the 
+``Membrane_Channel()`` component or the integral membrane protein GLUT1
+using the ``IntegralMembraneProtein()`` component to incorporate directionality.
 
 The following example begins by defining the integral membrane protein, 
 including the specification of its transport direction.
@@ -678,19 +676,19 @@ lipid bilayer. Unlike passive channels, pumps use energy, typically from ATP
 or an electrochemical gradient, to drive the transport of substrates against 
 their concentration gradients.
 
-The following code defines a membrane pump component called ``MC``. It requires
+The following code defines a membrane pump component called `MC`. It requires
 two inputs: ``integral_membrane_protein`` and ``substrate``, which can be 
 either strings or ``Species`` objects.
 
 .. code-block:: python
 
     # Define component
-    MP = MembranePump(membrane_pump = "MP", substrate = "S") 
+    MP = MembranePump(membrane_pump = "MP", substrate = "S")
 
-The component also accepts optional inputs, similar to the `IntegralMembraneProtein`.
+The component also accepts optional inputs, similar to the ``IntegralMembraneProtein()``.
 If the integral membrane protein was previously defined using the component
-`IntegralMembraneProtein`, then the `MembranePump` will inherit its `direction` and
-`compartment` properties from the existing species (e.g., ``IMP``). 
+``IntegralMembraneProtein()``, then the ``MembranePump()`` will inherit its ``direction`` and
+`compartment` properties from the existing species (e.g., `IMP`). 
 
 Additionally, optional arguments can be provided to control the transport direction, 
 stoichiometry, and compartment.
@@ -712,7 +710,7 @@ stoichiometry, and compartment.
 - ``direction``: By default, the ``direction`` is set to ``None``, generating a 
   CRN corresponding to an exporter.
 
-The ``MembranePump`` component uses the ``Primary_Active_Transport_MM()`` mechanism.
+The ``MembranePump()`` component uses the ``Primary_Active_Transport_MM()`` mechanism.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Mechanism: ``Primary_Active_Transport_MM()``
@@ -759,7 +757,7 @@ if the membrane pump is classified as an **exporter**, the resulting reactions a
     ADP_{internal}:MP_{exporter} \rightarrow ADP_{internal} + MP_{exporter} 
 
 To use ``Primary_Active_Transport_MM()``, we need to redefine the membrane channel 
-to include a transport direction designation, such as ``Importer`` or ``Exporter``. 
+to include a transport direction designation, such as `Importer` or `Exporter`. 
 For example:
 
 .. code-block:: python
@@ -827,13 +825,13 @@ Consider the following reactions for the export of erythromycin by MsbA.
 
     2ADP_{internal}:MsbA_{exporter} \rightarrow 2ADP_{internal} + MsbA_{exporter}
 
-To model the example above using the ``MembranePump`` component and the 
-``Primary_Active_Transport_MM`` mechanism, we can either define the pump directly 
-or specify the integral membrane protein (e.g., MsbA) using the ``IntegralMembraneProtein`` 
+To model the example above using the ``MembranePump()`` component and the 
+``Primary_Active_Transport_MM()`` mechanism, we can either define the pump directly 
+or specify the integral membrane protein (e.g., MsbA) using the ``IntegralMembraneProtein()`` 
 component to incorporate transport directionality.
 
 The following example begins by defining the integral membrane protein, including 
-the specification of its direction (e.g., ``Exporter``).
+the specification of its direction (e.g., `Exporter`).
 
 .. code-block:: python
 
@@ -932,7 +930,7 @@ responses within the cell.
 Component: ``MembraneSensor()``
 ~~~~~~~~~~
 
-The following code defines a membrane sensor component called ``Membrane_sensor``. 
+The following code defines a membrane sensor component called ``Membrane_sensor()``. 
 This component requires **four inputs**:
 
 - ``membrane_sensor_protein``: the membrane-bound sensor protein (e.g., a histidine kinase)
@@ -952,12 +950,12 @@ This component requires **four inputs**:
 
 **Key Optional Parameters**
 
-In addition, the `MembraneSensor` component has an optional input:
-
 - ``ATP``: an integer representing the number of ATP molecules required for phosphorylation events.  
   The default value is **2** if not explicitly specified.
 
-The "MembraneSensor" component utilizes the "Membrane_Signaling_Pathway_MM()" mechanism to model two-component signaling systems, where signal detection at the membrane results in phosphorylation-driven regulatory responses within the cell.
+The ``MembraneSensor()`` component utilizes the ``Membrane_Signaling_Pathway_MM()`` mechanism to model 
+two-component signaling systems, where signal detection at the membrane results in phosphorylation-driven 
+regulatory responses within the cell.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Mechanism: ``Membrane_Signaling_Pathway_MM()``
@@ -971,7 +969,11 @@ membrane. When the sensor kinase detects a stimulus, it undergoes autophosphoryl
 transferring a phosphate group to the response regulator. This transfer initiates 
 downstream cellular responses.
 
-The ``Membrane_Signaling_Pathway_MM()`` mechanism captures two-component signaling behavior using Michaelis-Menten kinetics to model key steps such as stimulus detection, sensor autophosphorylation, and phosphate transfer to a response regulator. The following reactions illustrate the signaling pathway modeled by the ``Membrane_Signaling_Pathway_MM()`` mechanism. These steps follow Michaelis-Menten dynamics to represent enzymatic interactions such as substrate binding, phosphorylation, and dephosphorylation.
+The ``Membrane_Signaling_Pathway_MM()`` mechanism captures two-component signaling behavior using 
+Michaelis-Menten kinetics to model key steps such as stimulus detection, sensor autophosphorylation, 
+and phosphate transfer to a response regulator. The following reactions illustrate the signaling pathway 
+modeled by the ``Membrane_Signaling_Pathway_MM()`` mechanism. These steps follow Michaelis-Menten dynamics 
+to represent enzymatic interactions such as substrate binding, phosphorylation, and dephosphorylation.
 
 1. **Signal detection and binding of the signal substrate (S_sig) to the membrane sensor (M_sensor):**
 
@@ -1065,9 +1067,9 @@ Use the reaction steps as a guide to define the necessary components and mechani
     NarL^{*} \rightarrow NarL + P_{i}
 
 
-To model the example above using the ``MembraneSensor`` component and the 
-``Membrane_Signaling_Pathway_MM`` mechanism, we can begin by defining a new integral 
-membrane protein (e.g., NarX) using the ``IntegralMembraneProtein`` component. This 
+To model the example above using the ``MembraneSensor()`` component and the 
+``Membrane_Signaling_Pathway_MM()`` mechanism, we can begin by defining a new integral 
+membrane protein (e.g., NarX) using the ``IntegralMembraneProtein()`` component. This 
 protein will serve as the membrane-bound sensor in the signaling pathway.
 
 The following example begins by defining the integral membrane protein, followed by 
@@ -1185,3 +1187,8 @@ References
 
 .. [Cheung09] J. Cheung and W. A. Hendrickson, *Structural analysis of ligand stimulation 
    of the histidine kinase NarX*. Structure, 2009.
+
+
+.. rubric:: Footnotes
+
+.. [1] Figures created with `BioRender.com <https://www.biorender.com>`__

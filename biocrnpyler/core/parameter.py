@@ -515,13 +515,16 @@ class ParameterDatabase(object):
         """Searches the database for the best matching parameter. 
         
         Parameter defaulting hierarchy:
-        (mechanism_name, part_id, param_name) --> param_val. If that particular parameter key cannot be found, 
+        (mechanism_name, part_id, param_name) --> param_val.
+        If that particular parameter key cannot be found, 
         the software will default to the following keys: 
         (mechanism_type, part_id, param_name) >> (part_id, param_name) >> 
         (mechanism_name, param_name) >> (mechanism_type, param_name) >>
         (param_name) and give a warning. 
-        As a note, mechanism_name refers to the .name variable of a Mechanism. mechanism_type refers to the .type variable of a Mechanism. 
-        Either of these can be used as a mechanism_id. This allows for models to be constructed easily using default parameter values and 
+        As a note, mechanism_name refers to the .name variable of a Mechanism. 
+        mechanism_type refers to the .type variable of a Mechanism. 
+        Either of these can be used as a mechanism_id. 
+        This allows for models to be constructed easily using default parameter values and 
         for parameters to be shared between different Mechanisms and/or Components.
         """
 

@@ -346,17 +346,37 @@ class Mixture(object):
             init_conc = None
             #1 Check the component
             if component is not None:
-                init_conc = component.get_parameter(param_name = str(s), part_id = self.name, mechanism = "initial concentration", check_mixture = False, return_none = True)
-
+                init_conc = component.get_parameter(param_name = str(s),
+                                                    part_id = self.name,
+                                                    mechanism = "initial concentration",
+                                                    check_mixture = False,
+                                                    return_none = True)
+                if init_conc is None:
+                    init_conc = component.get_parameter(param_name = s.name,
+                                                        part_id = self.name,
+                                                        mechanism = "initial concentration",
+                                                        check_mixture = False,
+                                                        return_none = True)
                 if init_conc is None and component.get_species() == s:
-                    init_conc = component.get_parameter(param_name = component.name, part_id = self.name, mechanism = "initial concentration", check_mixture = False, return_none = True)
-                
+                    init_conc = component.get_parameter(param_name = component.name,
+                                                        part_id = self.name,
+                                                        mechanism = "initial concentration",
+                                                        check_mixture = False,
+                                                        return_none = True)
+
             #2 Check self
             if init_conc is None:
-                init_conc = self.get_parameter(param_name = str(s), part_id = self.name, mechanism = "initial concentration")
-
+                init_conc = self.get_parameter(param_name = str(s),
+                                               part_id = self.name,
+                                               mechanism = "initial concentration")
+                if init_conc is None:
+                    init_conc = self.get_parameter(param_name = s.name,
+                                                   part_id = self.name,
+                                                   mechanism = "initial concentration")
                 if init_conc is None and component is not None and component.get_species() == s:
-                    init_conc = self.get_parameter(param_name = component.name, part_id = self.name, mechanism = "initial concentration")
+                        init_conc = self.get_parameter(param_name = component.name,
+                                                    part_id = self.name,
+                                                    mechanism = "initial concentration")
 
             if init_conc is None:
                 init_conc = 0

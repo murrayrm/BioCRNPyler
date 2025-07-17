@@ -143,7 +143,71 @@ common Components into multiple CRNs of very different levels of
 complexity.  Simulations from these models are shown in :ref:`Figure
 1.2 <fig-simulations>`.
 
-The latest list of items in the biocrnpyler library can be found on the `library page <https://biocrnpyler.readthedocs.io/en/latest/library.html>`_.
+The latest list of items in the biocrnpyler library can be found on
+the `library page
+<https://biocrnpyler.readthedocs.io/en/latest/library.html>`_.
+
+Documentation Conventions
+=========================
+
+This documentation has a number of notional conventions and functionality:
+
+* The left panel displays the table of contents and is divided into
+  two main sections: the User Guide, which contains a narrative
+  description of the package along with examples, and the Reference
+  Manual, which contains documentation for all functions, classes,
+  configurable default parameters, and other detailed information.
+
+* Classes, functions, and methods with additional documentation appear
+  in a bold, code font that links to the Reference Manual. Example:
+  `~biocrnpyler.core.species.Species`.
+
+* Links to other sections appear in blue. Example: :ref:`mechanisms_ref`.
+
+* Parameters appear in a (non-bold) code font, as do code fragments.
+  Example: `mechanism_type`.
+
+* Example code is contained in code blocks that can be copied using
+  the copy icon in the top right corner of the code block.  Code
+  blocks are of three primary types: summary descriptions, code
+  listings, and executed commands.
+
+  Summary descriptions show the calling structure of commands but are
+  not directly executable.  Example::
+
+    rxn = bcp.Reaction(inputs=[s1, s2, ...], outputs=[s3])
+
+  Code listings consist of executable code that can be copied and
+  pasted into a Python execution environment.  In most cases the
+  objects required by the code block will be present earlier in the
+  file or, occasionally, in a different section or chapter (with a
+  reference near the code block).  All code listings assume that the
+  NumPy package is available using the prefix `np` and the bioCRNpyler
+  package is imported using prefix `bcp`.  Example:
+
+  .. testcode::
+
+     import biocrnpyler as bcp
+
+     A = bcp.Species('A')
+     B = bcp.Species('B')
+     rxn = bcp.Reaction(
+         inputs=[A], outputs=[B],
+         propensity_type=bcp.MassAction(1e-2)
+     )
+
+  Executed commands show commands preceded by a prompt string of the
+  form ">>> " and also show the output that is obtained when executing
+  that code.  The copy functionality for these blocks is configured to
+  only copy the commands and not the prompt string or outputs.  Example:
+
+  .. doctest::
+
+     >>> print(rxn.pretty_print())
+     A --> B
+      Kf=k_forward * A
+       k_forward=0.01
+     <BLANKLINE>
 
 References
 ==========

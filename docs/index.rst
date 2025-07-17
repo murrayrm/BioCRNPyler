@@ -66,9 +66,19 @@ or the GitHub site: https://github.com/BuildACell/BioCRNPyler.
    :numbered: 2
 
    intro
-   tutorial
-   membrane_features
-   Reference Manual <reference>
+   core
+   components
+   mechanisms
+   mixtures
+   membranes
+   tutorials
+
+.. toctree::
+   :caption: Reference Manual
+   :maxdepth: 1
+
+   library
+   develop
 
 
 Indices and tables

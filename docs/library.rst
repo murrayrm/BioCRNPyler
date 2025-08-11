@@ -1,11 +1,43 @@
+***********************
 The BioCRNpyler Library
-=======================
+***********************
 
 .. automodule:: biocrnpyler
     :members:
     :undoc-members:
     :show-inheritance:
-    :noindex:
+
+Modules
+=======
+
+.. currentmodule:: biocrnpyler
+
+.. autosummary::
+   :toctree: generated/
+   :nosignatures:
+   :recursive:
+
+   core
+   components
+   mechanisms
+   mixtures
+
+Core Classes
+============
+
+.. automodule:: biocrnpyler
+		
+.. autosummary::
+   :toctree: generated/
+   :nosignatures:
+   :recursive:
+
+   ComplexSpecies
+   Species
+
+
+Components
+==========
 
 .. toctree::
     :maxdepth: 2
@@ -14,7 +46,7 @@ The BioCRNpyler Library
 .. include:: _autogen_components.rst
 
 Mechanisms
-----------
+==========
 
 .. toctree::
     :maxdepth: 2
@@ -23,7 +55,7 @@ Mechanisms
 .. include:: _autogen_mechanisms.rst
 
 Mixtures
---------
+========
 
 .. toctree::
     :maxdepth: 2
@@ -31,4 +63,3 @@ Mixtures
 
 .. include:: _autogen_mixtures.rst
 
-----

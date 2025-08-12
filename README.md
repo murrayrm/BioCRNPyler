@@ -5,11 +5,13 @@
 [![PyPI version](https://badge.fury.io/py/biocrnpyler.svg)](https://badge.fury.io/py/biocrnpyler)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/BuildACell/BioCRNPyler/master?filepath=%2Fexamples%2F)
 <!-- [![codecov](https://codecov.io/gh/BuildACell/BioCRNPyler/branch/master/graph/badge.svg)](https://codecov.io/gh/BuildACell/BioCRNPyler) -->
+[![Docs](https://readthedocs.org/projects/biocrnpyler/badge/)](https://biocrnpyler.readthedocs.io/)
 
 BioCRNPyler (pronounced Bio-Compiler) is a Python package for the creation, manipulation,
 and study of the structure, dynamics, and functions
 of complex biochemical networks.
 
+- **Documentation:** [Read the documentation here](https://biocrnpyler.readthedocs.io/en/latest/).
 - **Mailing list:** [SBTools Google Group](https://groups.google.com/g/sbtools/) Email: sbtools@googlegroups.com
 - **Source:** https://github.com/BuildACell/BioCRNPyler
 - **Paper:** - [BioCRNpyler: Compiling Chemical Reaction Networks from Biomolecular Parts in Diverse Contexts](https://doi.org/10.1371/journal.pcbi.1009987)
@@ -51,7 +53,9 @@ BioCRNpyler also allows for higher level descriptions to be compiled into a CRN.
 ![Specification to CRN Illustration](static/SpecificationToCRN.png)
 
 ```python
-from biocrnpyler import *
+from biocrnpyler.components import Promoter, RegulatedPromoter, CombinatorialPromoter
+from biocrnpyler.components import RBS, CDS, Terminator, DNA_construct
+from biocrnpyler.mixtures import TxTlExtract
 
 #Define a set of DNA parts
 ptet = RegulatedPromoter("ptet",["tetr"],leak=True) #this is a promoter repressed by tetR and has a leak reaction
@@ -91,13 +95,12 @@ Install the latest version of BioCRNPyler::
 
     $ pip install biocrnpyler
 
-Install with all optional dependencies::
+To plot the chemical reaction networks and simulate them, you may find it useful to install additional software:
 
-    $ pip install biocrnpyler[all]
+To simulate SBML models, run `pip install bioscrape` on your terminal.
+To visualize CRNs, run `pip install networkx`
 
-(Note that on some operating systems you made need to use "\[all\]" to avoid shell errors.)
-
-Further details about the installation process can be found in the [BioCRNPyler wiki](https://github.com/BuildACell/BioCRNPyler/wiki#installation).
+Further details about the installation process can be found in the [BioCRNPyler wiki](https://biocrnpyler.readthedocs.io/en/latest/)
 
 # Bugs
 
@@ -111,8 +114,8 @@ see [contribution guidelines](https://github.com/BuildACell/BioCRNPyler/blob/mas
 
 BioCRNpyler versions:
 
-* 1.2.0 (latest release): To install run `pip install biocrnpyler`
-* 1.1.2 (previous stable release): To install run `pip install biocrnpyler==1.1.2` 
+* 1.3.0 (latest release): To install run `pip install biocrnpyler`
+* 1.2.0 (previous stable release): To install run `pip install biocrnpyler==1.2.0`
 * 1.1.1 (compatible only with python <= 3.10): To install run `pip install biocrnpyler==1.1.1` 
 * 0.9.0 (beta release): To install run `pip install biocrnpyler==0.9.0`
 * 0.2.1 (alpha release): To install run `pip install biocrnpyler==0.2.1`

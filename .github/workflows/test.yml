@@ -9,7 +9,7 @@ jobs:
       max-parallel: 4
       matrix:
         os: [ubuntu-latest]
-        python-version: ["3.9", "3.12"]
+        python-version: ["3.10", "3.12"]
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
@@ -21,7 +21,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest pytest-cov python-libsbml
       - name: Tnstall biocrnpyler
-        run: pip install -e .[all]
+        run: pip install -e .
       - name: Test biocrnpyler
         run: pytest --cov biocrnpyler
       - uses: actions/checkout@main

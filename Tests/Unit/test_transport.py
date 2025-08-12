@@ -55,8 +55,8 @@ class test_membrane_integration():
     #Test Update Reactions
     #Define sensor parameter dictionary and component
     insertion_param_dict = {
-        ParameterKey(mechanism = "membrane_protein_integration", part_id = None, name = "kb_oligmor"):2e-3, 
-        ParameterKey(mechanism = "membrane_protein_integration", part_id = None, name = "ku_oligmor"):2e-10, 
+        ParameterKey(mechanism = "membrane_protein_integration", part_id = None, name = "kb_oligomer"):2e-3, 
+        ParameterKey(mechanism = "membrane_protein_integration", part_id = None, name = "ku_oligomer"):2e-10, 
         ParameterKey(mechanism = "membrane_protein_integration", part_id = None, name = "kex"): 2e-3, 
         ParameterKey(mechanism = "membrane_protein_integration", part_id = None, name = "kcat"):2e-10,}
     insertion_params=Component("insertion_params",parameters = insertion_param_dict)

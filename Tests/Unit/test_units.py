@@ -3,11 +3,11 @@
 # See LICENSE file in the project root directory for details.
 
 from unittest import TestCase
-from biocrnpyler.sbmlutil import create_sbml_model
-import biocrnpyler.units as units
+from biocrnpyler.utils.sbmlutil import create_sbml_model
+import biocrnpyler.utils.units as units
 import pytest
 import libsbml
-from biocrnpyler.units import *
+from biocrnpyler.utils.units import *
 
 def check(value, message):
         """If 'value' is None, prints an error message constructed using

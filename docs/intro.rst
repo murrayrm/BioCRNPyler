@@ -114,6 +114,15 @@ Component-Mechanism combinations.  This system is designed so that
 models can be produced quickly without full knowledge of all
 parameters and then refined with detailed parameter files later.
 
+**Compartments** are optional in BioCRNpyler. The default compartment 
+for all species in BioCRNpyler is called "default". Component Compartments
+can be set using setter functions for each component. Membrane components 
+in BioCRNpyler in `biocrnpyler/core/components/membrane/`` usually create
+an "Internal" and an "External" compartment. To replace the "default"
+compartment during compilation of a CRN with `compile_crn`, a 
+keyword argument `compartment=new_compartment` can be passed.
+Refer to the `examples/Specialized Tutorials/` for example use cases.
+
 .. _fig-code:
 
 .. figure:: figures/BioCRNpyler_Code.png
@@ -123,8 +132,7 @@ parameters and then refined with detailed parameter files later.
    Figure 1.3. Python code generating three repressilator CRNs.
 
 The BioCRNpyler Library
-=======================
-
+========================
 The BioCRNpyler library contains a growing collection of Mechanisms,
 Components, and Mixtures as well as extensive Jupyter
 notebooks.  Currently, this library is geared towards synthetic
@@ -143,6 +151,8 @@ increasingly complex models is illustrated in :ref:`Figure 1.3
 common Components into multiple CRNs of very different levels of
 complexity.  Simulations from these models are shown in :ref:`Figure
 1.2 <fig-simulations>`.
+
+The latest list of items in the biocrnpyler library can be found on the `library page <https://biocrnpyler.readthedocs.io/en/latest/library.html>`_.
 
 References
 ==========

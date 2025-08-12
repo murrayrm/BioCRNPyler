@@ -57,7 +57,6 @@ The following membrane-associated components are available in BioCRNpyler:
   signals (e.g., ligand binding, voltage change) and initiates a cellular 
   response, such as activating a signaling cascade.
 
-
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Membrane Mechanisms
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -164,7 +163,6 @@ In BioCRNpyler, the ``DiffusibleMolecule()`` component uses the mechanism
     mech_tra = Simple_Diffusion()
     transport_mechanisms = {mech_tra.mechanism_type: mech_tra}
 
-
 ~~~~~~~~~~
 Example 1: Diffusion of nitrate
 ~~~~~~~~~~
@@ -225,7 +223,6 @@ and then incorporate it into a mixture using the mechanism to construct a CRN.
       search_key=(mech=simple_diffusion, partid=NO3, name=k_diff).
 
     ]
-
 
 -------------
 Integral Membrane Protein
@@ -309,7 +306,6 @@ stored in a dictionary.
     mech_integration = Membrane_Protein_Integration()
     integration_mechanisms = {mech_integration.mechanism_type: mech_integration}
 
-
 ~~~~~~~~~~
 Example 2: Integration of alpha-hemolysin
 ~~~~~~~~~~
@@ -390,7 +386,6 @@ a mixture using the integration mechanism to construct a CRN.
 
     ]
 
-
 -------------
 Membrane Channels 
 -------------
@@ -459,7 +454,6 @@ The mechanism for simple transport can be implemented and stored in a dictionary
     mech_transport = Simple_Transport()
     transport_mechanisms = {mech_transport.mechanism_type: mech_transport}
 
-
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Example 3: Simple Transport by alpha-hemolysin
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -521,7 +515,6 @@ a CRN that enables passive transport across the membrane.
 
     ]
 
-
 .. _facilitated-transport:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -560,7 +553,6 @@ to include a transport direction designation, such as `Importer` or
     # Define component
     MC = MembraneChannel(integral_membrane_protein = "IMP", substrate = "S",     
                          direction = 'Importer')
-
 Then, the mechanism for facilitated transport can be implemented and stored in 
 a dictionary.
 
@@ -569,7 +561,6 @@ a dictionary.
     # Mechanism 
     mech_transport = Facilitated_Transport()
     transport_mechanisms = {mech_transport.mechanism_type: mech_transport}
-
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Example 4: Facilitated transport of glucose by GLUT1
@@ -670,7 +661,6 @@ including the specification of its transport direction.
     k_forward=0.1
 
     ]
-
 
 -------------
 Membrane Pumps 
@@ -783,7 +773,6 @@ Then, the mechanism for facilitated transport can be implemented and stored in a
     # Mechanism
     mech_transport = Primary_Active_Transport_MM()
     transport_mechanisms = {mech_transport.mechanism_type: mech_transport}
-
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Example 5: Export of erythromycin by MsbA
@@ -920,7 +909,6 @@ the specification of its direction (e.g., `Exporter`).
     
     ]
 
-
 ---------------
 Membrane Sensors 
 ---------------
@@ -1022,7 +1010,6 @@ Then, the mechanism for membrane signaling can be implemented and stored in a di
     # Mechanism
 	mech_sensor = Membrane_Signaling_Pathway_MM()
 	sensor_mechanisms = {mech_sensor.mechanism_type:mech_sensor}
-
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Example 6: NarX-NarL two-component signaling path
@@ -1175,7 +1162,6 @@ the response regulator and relevant signaling substrates.
     k_forward=2e-10
 
     ]
-
 
 .. ---------------
 .. Exercises

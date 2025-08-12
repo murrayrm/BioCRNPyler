@@ -1,47 +1,10 @@
-# __init__.py - initialization of biocrnpyler toolbox
-# RMM, 11 Aug 2018
-
-from .chemical_reaction_network import *
-from .component import *
-# Core components
-from .components_basic import *
-from .dna_assembly import *
-from .dna_construct import *
-from .dna_part import *
-from .dna_part_cds import *
-from .dna_part_misc import *
-from .dna_part_promoter import *
-from .dna_part_rbs import *
-from .dna_part_terminator import *
-from .construct_explorer import *
-from .integrase_enumerator import *
-from .components_combinatorial_complex import *
-from .components_combinatorial_conformation import *
-from .components_membrane import *
-
-from .global_mechanism import *
-from .mechanism import *
-#core mechanisms
-from .mechanisms_binding import *
-from .mechanisms_enzyme import *
-from .mechanisms_txtl import *
-from .mechanisms_integrase import *
-from .mechanisms_transport import *
-from .mechanisms_signaling import *
-# Core classes
-from .mixture import *
-from .mixtures_cell import *
-from .mixtures_extract import *
-from .parameter import *
-from .plotting import *
-from .polymer import *
-from .propensities import *
-from .reaction import *
-
-from .sbmlutil import *
-from .species import *
-from .compartments import *
+# All core classes
+from .core import *
+# Library of all components
+from .components import *
+#Library of all mechanisms
+from .mechanisms import *
+# Library of all mixtures
+from .mixtures import *
+# All utilities
 from .utils import *
-
-#checking for nonexistant plotting-related modules now happens in plotting.py
-from .component_enumerator import *

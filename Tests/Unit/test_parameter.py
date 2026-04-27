@@ -516,7 +516,7 @@ class TestParameter(TestCase):
         )
 
 
-def test_findpath():
+def test_findpath(tmp_path):
     import os
     import platform
 
@@ -530,21 +530,32 @@ def test_findpath():
         bcp.find_file_in_bcp_path('mechanisms/txtl_parameters.tsv')
     )
 
-    # Make sure we can find files in current directory
-    assert bcp.find_file_in_bcp_path('__testfile__.tsv') is None
-    open('__testfile__.tsv', 'w')
-    assert os.path.exists(bcp.find_file_in_bcp_path('__testfile__.tsv'))
-    os.remove('__testfile__.tsv')
+    prev_cwd = os.getcwd()
+    prev_bcp_path = os.environ.get('BCP_PATH')
+    child_dir = tmp_path / 'child'
+    child_dir.mkdir()
+    os.chdir(child_dir)
+    try:
+        # Make sure we can find files in current directory
+        assert bcp.find_file_in_bcp_path('__testfile__.tsv') is None
+        (child_dir / '__testfile__.tsv').write_text('')
+        assert os.path.exists(bcp.find_file_in_bcp_path('__testfile__.tsv'))
+        os.remove(child_dir / '__testfile__.tsv')
 
-    # Make sure we can find files in the path
-    open('../__testfile__.tsv', 'w')
-    assert bcp.find_file_in_bcp_path('__testfile__.tsv') is None
-    if platform.system() == 'Windows':
-        os.environ['BCP_PATH'] = '/tmp;.;..'
-    else:
-        os.environ['BCP_PATH'] = '/tmp:.:..'
-    assert os.path.exists(bcp.find_file_in_bcp_path('__testfile__.tsv'))
-    os.remove('../__testfile__.tsv')
+        # Make sure we can find files in the path
+        (tmp_path / '__testfile__.tsv').write_text('')
+        assert bcp.find_file_in_bcp_path('__testfile__.tsv') is None
+        if platform.system() == 'Windows':
+            os.environ['BCP_PATH'] = f'/tmp;.;{tmp_path}'
+        else:
+            os.environ['BCP_PATH'] = f'/tmp:.:{tmp_path}'
+        assert os.path.exists(bcp.find_file_in_bcp_path('__testfile__.tsv'))
+    finally:
+        os.chdir(prev_cwd)
+        if prev_bcp_path is None:
+            os.environ.pop('BCP_PATH', None)
+        else:
+            os.environ['BCP_PATH'] = prev_bcp_path
 
 
 def test_parameter_ordering():
